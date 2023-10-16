@@ -1,0 +1,376 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documentation Template</title>
+    <meta name="description" content="Rhizo Compute">
+
+    <link rel="stylesheet" href="style.css?">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <a href="#"><img class="logo" src="rhizo.png"></a>
+            <a class="right" style="text-decoration: underline;" href="#"><i class="fas fa-book"></i>&nbsp; Documentation</a>
+            <a class="right" href="mailto:yourapp@email.com" target="_blank"><i class="fas fa-paper-plane"></i>&nbsp; yourapp@email.com</a>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">
+
+            <div class="sidepanel">
+
+                <a class="title" href="#">Introduction</a>
+                
+                <a class="section" href="#">Supported Versions</a>
+                <a class="section" href="#">About Rhizo</a>
+                <a class="section" href="#technology">Technology</a>
+                <a class="section" href="#glossary">Glossary</a>                
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#gettingstarted">Getting Started</a>
+                <a class="section" href="#installrust">Install Rust</a>
+                <a class="section" href="#installsolana">Install Solana Tool Suite</a>
+                <a class="section" href="#setupkeypair">Setup a Solana Keypair</a>                
+                <a class="section" href="#installcli">Install the CLI</a>       
+                <a class="section" href="#installwasix">Install WASIX</a>       
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#basicfeatures">How-to</a>
+
+                <a class="section" href="#configuration">Build with the API</a>
+                <a class="section" href="#compilation">Configure Routes</a>
+                <a class="section" href="#arguments">Deploy Routes</a>
+                <a class="section" href="#deploying">Run Your Code</a>
+                <a class="section" href="#async">Write Async Code</a>
+                <a class="section" href="#http">Make HTTP Requests</a>
+                <div class="divider left"></div>
+
+                <!-- <a class="title" href="#advanced">Advanced Features</a>-->
+
+                
+
+             <div class="space double"></div>
+
+            </div>
+
+            <div class="right-col">
+                <br><br>
+                <p><important><b>Important:</b> Solana requirements are for devnet SOL and can be obtained for free by using <inlinecode>solana airdrop 1</inlinecode>. Rhizo devnet will always be available to developers. When Rhizo mainnet launches, the newly launched network will use mainnet SOL.</important></p>
+            
+                <h1 >Introduction</h1>
+                
+                <p>Rhizo is decentralized infrastructure technology for hosting, globally distributing, executing, and serving WebAssembly code output as HTTP routes. Rhizo acts as a function-as-a-service platform, API platform, artifactory, and distribution network <b>all-in-one</b>, powered by the decentralized web.</p> 
+            
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                <h2>Supported Versions:</h2>
+             
+                <b>Rhizo version 0.1-publicpreview</b> This is currently the only supported version of Rhizo.
+                <br><b>Rhizo version 0.1-alpha</b> Open sources Rhizo-server. Allows anyone to become a network operator.
+                
+                <br>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                <h2>About Rhizo</h2>
+                
+                <p>Rhizo stores <b>ultra-lightweight</b> WebAssembly executables paired with HTTP route configurations. Arguments to hosted code are provided through traditional HTTP interfaces, as to maintain <b>compatibility</b> with front-ends requesting HTTP resources.</p>
+
+                <p>The Rhizo network performs load-balancing to tap into the resources of the broader network for <b>scalibility</b></p>
+                <p>The name network supports a rapidly growing list of geographic regions. All code lives in all regions by default to maximize <b>availibility</b></p>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                <h2>Technology</h2>
+                <ul>
+                    <li>Metadata backed by the <a href="https://solana.com/">Solana</a> blockchain</li>
+                    <li><a href="https://github.com/wasmerio/wasmer">Wasmer</a> runtime</li>
+                    <li><a href="https://wasix.org/">WASIX</a> compatible executables</li>
+                    <li>Forked <a href="https://github.com/libp2p/rust-libp2p">libp2p-rs</a></li>
+                </ul>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                 <h2>Glossary</h2>
+                 <p>
+                 <b>Executable</b> - Compiled WebAssembly source 
+                 <br><br><b>Route</b> - A queryable HTTP endpoint hosted on Rhizo servers, a route executes an executable after verifying that the required arguments were provided and a supported encoding was requested. 
+                 <br><br><b>Public Key</b> - TLDR; your Solana public key is your unique identifier on the Rhizo network
+                 </p>
+                    
+
+        <div class="divider" style="width:24%; margin:30px 0;"></div>
+                <h1 id="gettingstarted">Getting Started</h1>
+
+                <h2>Prerequisites</h2>
+                
+                <p></p> 
+
+                <h2 id="installrust">Install Rust</h2>
+                
+                
+                   <ol>
+                    <li>
+                        Follow the official Rust installation instructions from <a href="https://www.rust-lang.org/tools/install">here</a>.
+                    </li>
+                    <br>
+                    <li>
+                        Verify your Rust installation with:<br><br>                    <code class="unindent"><bashcmd>rustc</bashcmd> --version && <bashcmd>cargo</bashcmd> --version</code><br> You should see version numbers for each binary.
+
+                    </li>
+                </ol>
+                <br> 
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                <h2 id="installsolana">Install Solana Tool Suite</h2>
+                
+                
+                   <ol>
+                    <li>
+                        Follow the official Solana installation instructions from <a href="https://docs.solana.com/cli/install-solana-cli-tools">here</a>.
+                    </li>
+                    <br>
+                    <li>
+                        Verify your Solana installation with <br><br><code class="unindent"><bashcmd>solana</bashcmd> --version</code> 
+                    </li>
+                </ol>
+                <br>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                <h2 id="setupkeypair">Setup a Solana Keypair</h2>
+                
+                
+                 <ol>
+                    <li>
+                        Generate a new keypair with <br><br><code class="unindent"><bashcmd>solana-keygen</bashcmd> new</code><br><br> 
+                    </li>
+                    <li>
+                        Verify your keypair generation with<br><br><code class="unindent"><bashcmd>solana</bashcmd> address</code><br>You should see a base58 encoded Solana address.<br><br> 
+                    </li>
+                    <li>
+                        Open <path>~/.config/solana/cli/config.yml</path> with your favorite text editor.<br>Verify that the value json_rpc_url evaluates to: https://api.devnet.solana.com
+                        <br><br><code class="unindent"><tomlvar>json_rpc_url</tomlvar>: https://api.devnet.solana.com</code><br><br> 
+                    </li>
+                    <li>
+                        Airdrop yourself some devnet SOL with <br><br><code class="unindent"><bashcmd>solana</bashcmd> airdrop 1</code><br><br>
+                    </li>
+                </ol>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+
+                <h2 id="installcli">Install the CLI</h2>
+                
+                 <ol>
+                    <li>
+                        Install the CLI from cargo <br><br><code class="unindent"><bashcmd>cargo</bashcmd> install $cli</code><br><br>
+                    </li>
+                    <li>
+                        Verify the installation by running<br><br><code class="unindent"><bashcmd>cargo</bashcmd> $cli --version</code>
+                    </li>
+                    <br>
+                    <br>
+                </ol>
+
+                <h2 id="installcli">Install WASIX</h2>
+             
+                 <ol>
+                    <li>
+                        Follow the <a href="https://wasix.org/docs/language-guide/rust/installation">official WASIX installation instructions</a>. <br><br>
+                    </li>
+                    <li>
+                        Verify installation with
+                        <br><br><code class="unindent"><bashcmd>cargo</bashcmd> wasix --version</code>
+                    </li>
+                    <br>
+                    <br>
+                </ol>
+                <p id="basicfeatures"></p>
+
+                    
+            <div class="divider" style="width:24%; margin:30px 0;"></div>
+            
+            
+                <h1>How-to</h1>
+                <h2 id="readingarguments">Build with the API</h2>
+                <br><h3>Example:</h3>
+                <br>This example is the classic Hello, world! example for Rhizo.
+                <br><br><ol>
+                    <li>Create a new cargo project<br><br><code class="unindent"><bashcmd>cargo</bashcmd> new helloworld</code><br></li>                    
+                    <li>Change directories to your newly created project<br><br><code class="unindent"><bashcmd>cd</bashcmd> helloworld</code><br></li>
+                    <li>Let's start with a blank main.rs, clear the contents of this file<br><br><code class="unindent"><bashcmd>echo</bashcmd> "" &gt; src/main.rs</code><br></li>                    
+                    <li>Open <path>src/main.rs</path> with your favorite text editor<br><br></li>
+                    <li>Import the Rhizo WebAssembly API<br><br><code class="unindent">use <rustvar>api</rustvar>::<rusttype>*</rusttype>;</code><br></li>
+                    <li>Call the fn_main macro to declare a main function, read the buffer of arguments, and return route output bytes.<br><br><code class="unindent"><rustvar>fn_main!</rustvar>({ <ruststr>b"Hello, world!"</ruststr>.to_vec() })</code><br>Congratulations! You just finished writing your first Rhizo function.<br><br></li>                    
+                    <li>Compile your Rust code to WebAssmebly<br><br><code class="unindent"><bashcmd>cargo</bashcmd> wasix build --release</code><br></li>                    
+                </ol>
+                <br>
+                        <div class="divider" style="width:24%; margin:30px 0;"></div>
+                <h2 id="configuration">Configure Routes</h2>
+                This section focuses on a Rhizo functions' route <a href="https://toml.io/en/">TOML</a> configuration. Now that we've walked through the development flow and compiled WebAssembly code we just need a route configuration before deploying and executing this function on the web. The route configuration will configure how your function interfaces with callers over HTTP on Rhizo servers. 
+                    <br>
+                    <br>
+                    <b>route</b> - The route variable is an identifier for your code. This function will become publicly available at a route on Rhizo servers made of the encoding type, the author's public key, and the route.
+                    <br><br>
+                    <b>encodings</b> - Encodings indicate what output types you would like your function's route to support.<br><b>Supported Values:</b> [texthtml, textplain, applicationoctetstream]
+                    <br><br>
+                    <b>arguments </b> - At runtime arguments are parsed from query parameters on the incoming request. These values can be fetched from within the WebAssembly container with the Rhizo API.
+                    <br><br>Argument<br> { name: String, argument_type: ArgumentType }
+                    <br><br><b>Supported ArgumentTypes:</b> [u8, u16, u32, u64, i8, i16, i32, i64, f32, f64, String, Vec&lt;VecType&gt;]
+                    <br><b>Supported VecTypes:</b> [u8, u16, u32, u64, i8, 16, i32, i64, f32, f64, String, Vec&lt;u8&gt;, Vec&lt;String&gt;]
+                    <br><br>See <a href="https://doc.rust-lang.org/book/ch03-02-data-types.html">Rust Data Types</a>.
+                    <br><br><h3>Examples:</h3>
+                    <br><b>Hello, World!</b>
+                    <br> This example configuration shows a route that can be reached at /text/html/$AUTHOR_PUBKEY/helloworld and takes no arguments. This route will have the text/html content-type on its response.
+                    <br><br><p><div><code><tomlvar>route</tomlvar> = <tomlstr>"helloworld"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"texthtml"</tomlstr>] <br><tomlvar>arguments</tomlvar> = []</code></div></p>
+                    <br><b>Multiple Arguments Multiple Encodings</b>
+                    <br> This example configuration shows a route that can be reached at /text/plain/$AUTHOR_PUBKEY/multiple and application/json/$AUTHOR_PUBKEY/multiple. It takes two arguments: search_term of type String and search_urls of type Vec&lt;String&gt;.
+                    <br><br><code><tomlvar>route</tomlvar> = <tomlstr>"searchurls"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"textplain"</tomlstr>, <tomlstr>"applicationjson"</tomlstr>]<br><tomlvar>arguments</tomlvar> = [<br>{ <tomlvar>name</tomlvar> = <tomlstr>"search_term"</tomlstr>, <tomlvar>argument_type</tomlvar> = <tomlstr>"String"</tomlstr> },<br>{ <tomlvar>name</tomlvar> = <tomlstr>"search_urls"</tomlstr>, <tomlvar>argument_type</tomlvar> = <tomlstr>"Vec&lt;String&gt;"</tomlstr>}<br>]</code>
+                    <p> 
+                </p>
+                <br>
+                        <div class="divider" style="width:24%; margin:30px 0;"></div>
+
+                <h2 id="deploying">Deploy Routes</h2>
+                <ol>
+                    <li>From the directory of your cargo project run<br><br><code class="unindent"><bashcmd>cargo</bashcmd> install $lowercasename-cli</code><br></li>                    
+                    <li>Deploy your WASIX compiled WebAssembly<br><br><code class="unindent"><bashcmd>cli</bashcmd> deploy target/wasm32-wasmer-wasi/release/$PROJECT_NAME.wasm $PATH_TO_ROUTE_CONFIG</code></li>
+                </ol>
+                 <p>
+                </p>
+                <br>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+               <h2 id="executing">Run your Code</h2>
+                 Functions can be invoked by requesting their route. A function's route on any Rhizo server will be a concatenation of encoding_type:author_pubkey:route.
+                 <br><h3>Example</h3>
+                 Let's take our Hello, world! example from earlier and assume our author pubkey is <path>3E7jPTYR8ZhJm7g4kBsbpW5ibXLwmmWX8XKfAdQmhioZ</path>:
+                 <br><br><code><tomlvar>route</tomlvar> = <tomlstr>"helloworld"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"texthtml"</tomlstr>] <br><tomlvar>arguments</tomlvar> = []</code>
+                 <br>We can invoke execution of this function by requesting its route as such
+                 <br><br><code><bashcmd>curl</bashcmd> $URL/text/html/3E7jPTYR8ZhJm7g4kBsbpW5ibXLwmmWX8XKfAdQmhioZ/index</code>
+                 <br>Author pubkey is the Solana pubkey that issued the deploy command from the CLI. You can check your Solana pubkey with<br><br>
+                 <code><bashcmd>solana</bashcmd> address</code>
+               <p>
+                <br>
+                </p>
+                
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                
+                <h2 id="async">Write Async Code</h2>
+                WASIX is a superset of WASI which brings the capability to perform asynchronous and network operations in WebAssembly. There are certain Rust crates with WASIX compatible branches that bring these capabilities to your WebAssembly project.
+                <br><br><a href="https://github.com/wasix-org/">Read more</a> about WASIX compatibility in the Rust ecosystem. 
+                <p>
+                The Rhizo API provides a macro for running code within the tokio asynchronous runtime. This macro expects a block of code which will run asynchronously. From here you can call .await on Futures.
+                <br><h3>Example:</h3>
+                <br><br>
+                <code>
+                    use <rustvar>api</rustvar>::<rusttype>*</rusttype>; <rustcmt>// Import API helper functions & macros</rustcmt><br>
+                    <br> 
+                    <rustvar>fn_main!</rustvar>(( <rustcmt>// Init main function & argument buffer with the fn_main macro </rustcmt><br>
+                    &emsp;&emsp;<rustvar>|</rustvar>buffer: <rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;</rustvar><rustvar>|</rustvar> { <rustcmt>// buffer contains our arguments</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>async_block!</rustvar>({<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustcmt>// We're free to use .await on futures within this block!</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<ruststr>b"Hello, world!"</ruststr>.to_vec() <br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustcmt>// The async_block macro expects a block that evalutes to Vec<u8>,</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustcmt>// the route's output bytes</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;});<br>
+                    });<br>
+                    
+                </code>                 
+                </p>   
+                       <div class="divider" style="width:24%; margin:30px 0;"></div>
+ 
+                <h2 id="http">Make HTTP Requests</h2>
+                WASIX is a superset of WASI which brings the capability to perform asynchronous and network operations in WebAssembly. There are certain Rust crates with WASIX compatible branches that bring these capabilities to your WebAssembly project.
+                <br><br><a href="https://github.com/wasix-org/">Read more</a> about WASIX compatibility in the Rust ecosystem.
+                <p>
+                The reqwest crate is a WASIX compatible way to make HTTP requests in your function.
+                <br><h3>Example:</h3>
+                <br>This example demonstrates how make an HTTP get request from your WebAssembly code. <br>
+                <code>
+                    use <rustvar>api</rustvar>::<rusttype>*</rusttype>; <rustcmt>// Import API helper functions & macros</rustcmt><br>
+                    <br> 
+                    <rustvar>fn_main!</rustvar>(( <rustcmt>// Init main function & argument buffer with the fn_main macro</rustcmt><br>
+                    &emsp;&emsp;<rustvar>|</rustvar>buffer: <rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;</rustvar><rustvar>|</rustvar> { <rustcmt>// buffer contains our arguments, if applicable</rustcmt><br>
+                    &emsp;&emsp; &emsp;&emsp;<rustvar>async_block!</rustvar>({<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rusttype>let</rusttype> url_argument = <rustvar>api</rustvar>::<rustfn>read_string_argument</rustfn>(buffer);<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustvar>reqwest</rustvar>::<rustfn>get</rustfn>(url_argument.<rustfn>get</rustfn>())<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.await<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>unwrap</rustfn>()<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>bytes</rustfn>()<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.await<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>unwrap</rustfn>()<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>into_iter</rustfn>()<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>collect</rustfn>::<rustvar>&lt;</rustvar><rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;&gt;</rustvar>()<br>
+                    &emsp;&emsp; &emsp;&emsp;});<br>
+                    });<br>
+                    
+                </code>                                
+                </p> 
+                <div class="doublespace"></div>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                
+                <!--<h1>Advanced Features</h1>-->
+                
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+<script>
+// Select all elements with the class "copy-text"
+const elements = document.querySelectorAll('code');
+
+// Add a click event listener to each element and prepend the icon to its HTML content
+elements.forEach(element => {
+    // Prepend the icon to each element initially
+    element.insertAdjacentHTML('afterbegin', '<i class="fa fa-clipboard" style="position: absolute; right:0; top: 0; padding-top:0.3rem;padding-right:1rem;"></i> ');
+
+    element.addEventListener('click', function() {
+        const originalHTML = element.innerHTML;  // Store the original HTML (including the icon)
+        const originalText = element.textContent;
+
+        // Only perform copy if the text isn't "Copied to clipboard"
+        if (!originalText.includes("Copied to clipboard")) {
+            copyToClipboard(originalText);
+
+            // Update the element's text to "Copied to clipboard" but keep the icon
+            element.innerHTML = '<i class="fa fa-clipboard" style="position: absolute; right:1%; top: 10%;"></i> Copied to clipboard';
+
+            // After 2 seconds (2000 milliseconds), revert the HTML back to the original (which includes the icon)
+            setTimeout(function() {
+                element.innerHTML = originalHTML;
+            }, 2000);
+        }
+    });
+});
+
+// Function to copy text to clipboard
+function copyToClipboard(text) {
+    // Create a temporary textarea element
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    // Try to copy text content to clipboard
+    try {
+        document.execCommand('copy');
+        console.log('Text copied to clipboard');
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+    }
+
+    // Clean up: remove the temporary textarea element
+    document.body.removeChild(textarea);
+}
+
+</script>
+</html>
