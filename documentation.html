@@ -74,11 +74,10 @@
             <div class="right-col">
                 <br><br>
                 <p><important><b>Important:</b> Solana requirements are for devnet SOL and can be obtained for free by using <inlinecode>solana airdrop 1</inlinecode>. Rhizo devnet will always remain freely available to developers for testing and prototyping. When Rhizo mainnet launches, the newly launched network will use mainnet SOL.</important></p>
-                <p><important><b>Important:</b> While rhizo-server remains an alpha build there will be limitations on the number of routes per pubkey. This limit will eventually be lifted. This limit is currently set to 3.</important></p>
             
                 <h1 >Introduction</h1>
                 
-                <p>Rhizo is decentralized severless infrastructure for hosting, globally distributing, executing, and serving WebAssembly code output as HTTP routes. Rhizo acts as a function-as-a-service platform, API platform, artifactory, and distribution network <b>all-in-one</b>, powered by Solana and libp2p.</p> 
+                <p>Rhizo is decentralized severless infrastructure for hosting, globally distributing, executing, and serving HTTP routes backed by your WebAssembly code. Rhizo acts as a function-as-a-service platform, API platform, artifactory, and distribution network <b>all-in-one</b>, powered by Solana and libp2p.</p> 
                  
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2>Versions Overview:</h2>
@@ -266,6 +265,7 @@
                         <div class="divider" style="width:24%; margin:30px 0;"></div>
 
                 <h2 id="deploying">Deploy Routes</h2>
+                <p><important><b>Important:</b> While rhizo-server remains an alpha build there will be limitations on the number of routes per pubkey. This limit is enforced by the smart contract and will eventually be lifted. This limit is currently set to 3.</important></p>
                 <ol>
                     <li>From the directory of your cargo project run<br><br><code class="unindent"><bashcmd>cargo</bashcmd> install $lowercasename-cli</code><br></li>                    
                     <li>Deploy your WASIX compiled WebAssembly<br><br><code class="unindent"><bashcmd>cli</bashcmd> deploy target/wasm32-wasmer-wasi/release/$PROJECT_NAME.wasm $PATH_TO_ROUTE_CONFIG</code></li>
