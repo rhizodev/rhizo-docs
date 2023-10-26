@@ -22,7 +22,7 @@
         <div class="row content">
             <a href="#"><img class="logo" src="rhizo.png"></a>
             <a class="right" style="text-decoration: underline;" href="#"><i class="fas fa-book"></i>&nbsp; Documentation</a>
-            <a class="right" href="mailto:yourapp@email.com" target="_blank"><i class="fas fa-paper-plane"></i>&nbsp; yourapp@email.com</a>
+            <a class="right" href="mailto:contact@rhizo.dev" target="_blank"><i class="fas fa-paper-plane"></i>&nbsp;contact@rhizo.dev</a>
         </div>
     </div>
 
@@ -59,7 +59,11 @@
                 <a class="section" href="#http">Make HTTP Requests</a>
                 <div class="divider left"></div>
 
-                <!-- <a class="title" href="#advanced">Advanced Features</a>-->
+                <a class="title" href="#advanced">Advanced Features</a>
+                <a class="section" href="#configuration">Read On-chain Bytes</a>
+                <a class="section" href="#configuration">Write On-chain Bytes</a>
+                <a class="section" href="#configuration">Read Off-chain Bytes</a>
+                <a class="section" href="#configuration">Write Off-chain Bytes</a>
 
                 
 
@@ -69,40 +73,43 @@
 
             <div class="right-col">
                 <br><br>
-                <p><important><b>Important:</b> Solana requirements are for devnet SOL and can be obtained for free by using <inlinecode>solana airdrop 1</inlinecode>. Rhizo devnet will always be available to developers. When Rhizo mainnet launches, the newly launched network will use mainnet SOL.</important></p>
+                <p><important><b>Important:</b> Solana requirements are for devnet SOL and can be obtained for free by using <inlinecode>solana airdrop 1</inlinecode>. Rhizo devnet will always remain freely available to developers for testing and prototyping. When Rhizo mainnet launches, the newly launched network will use mainnet SOL.</important></p>
+                <p><important><b>Important:</b> While rhizo-server remains an alpha build there will be limitations on the number of routes per pubkey. This limit will eventually be lifted. This limit is currently set to 3.</important></p>
             
                 <h1 >Introduction</h1>
                 
-                <p>Rhizo is decentralized infrastructure technology for hosting, globally distributing, executing, and serving WebAssembly code output as HTTP routes. Rhizo acts as a function-as-a-service platform, API platform, artifactory, and distribution network <b>all-in-one</b>, powered by the decentralized web.</p> 
-            
+                <p>Rhizo is decentralized severless infrastructure for hosting, globally distributing, executing, and serving WebAssembly code output as HTTP routes. Rhizo acts as a function-as-a-service platform, API platform, artifactory, and distribution network <b>all-in-one</b>, powered by Solana and libp2p.</p> 
+                 
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2>Supported Versions:</h2>
+                <h2>Versions Overview:</h2>
              
-                <b>Rhizo version 0.1-publicpreview</b> This is currently the only supported version of Rhizo.
-                <br><b>Rhizo version 0.1-alpha</b> Open sources Rhizo-server. Allows anyone to become a network operator.
-                
+                <b>rhizo-cli</b> v0.1.0 This is currently the only supported version of Rhizo.
+                <br><b>rhizo-server</b> v0.1.0-alpha (Coming soon!) Open sources rhizo-server. Off-chain bytes API.
+                <br><b>rhizo-cli</b> v0.1.1 (Coming soon!) Off-chain bytes API support.
                 <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2>About Rhizo</h2>
                 
-                <p>Rhizo stores <b>ultra-lightweight</b> WebAssembly executables paired with HTTP route configurations. Arguments to hosted code are provided through traditional HTTP interfaces, as to maintain <b>compatibility</b> with front-ends requesting HTTP resources.</p>
-
-                <p>The Rhizo network performs load-balancing to tap into the resources of the broader network for <b>scalibility</b></p>
-                <p>The name network supports a rapidly growing list of geographic regions. All code lives in all regions by default to maximize <b>availibility</b></p>
+                <br>Rhizo stores <b>ultra-lightweight</b> WebAssembly modules paired with HTTP route configurations. Arguments to hosted code are provided through traditional HTTP interfaces, as to maintain <b>compatibility</b> with front-ends requesting HTTP resources.
+                <br>
+                <br>The rhizo network performs load-balancing to tap into the resources of the broader network for <b>scalibility</b>
+                <br><br>The rhizo network supports a rapidly growing list of geographic regions. All code lives in all regions by default to maximize <b>availibility</b>
+                <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2>Technology</h2>
                 <ul>
                     <li>Metadata backed by the <a href="https://solana.com/">Solana</a> blockchain</li>
                     <li><a href="https://github.com/wasmerio/wasmer">Wasmer</a> runtime</li>
-                    <li><a href="https://wasix.org/">WASIX</a> compatible executables</li>
+                    <li><a href="https://wasix.org/">WASIX</a> compatible modules</li>
                     <li>Forked <a href="https://github.com/libp2p/rust-libp2p">libp2p-rs</a></li>
                 </ul>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                  <h2>Glossary</h2>
                  <p>
-                 <b>Executable</b> - Compiled WebAssembly source 
-                 <br><br><b>Route</b> - A queryable HTTP endpoint hosted on Rhizo servers, a route executes an executable after verifying that the required arguments were provided and a supported encoding was requested. 
+                 <b>Module</b> - WASIX compiled WebAssembly source 
+                 <br><br><b>Route</b> - A queryable HTTP endpoint hosted on Rhizo servers, a route executes a module after verifying that the required arguments were provided and a supported encoding was requested. 
                  <br><br><b>Public Key</b> - TLDR; your Solana public key is your unique identifier on the Rhizo network
+                 <br><br><b>WASM</b> - WebAssembly. In the context of Rhizo, we recommend WASIX compatible WASM to enable network and asynchronous operations 
                  </p>
                     
 
@@ -126,7 +133,6 @@
 
                     </li>
                 </ol>
-                <br> 
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2 id="installsolana">Install Solana Tool Suite</h2>
                 
@@ -140,7 +146,6 @@
                         Verify your Solana installation with <br><br><code class="unindent"><bashcmd>solana</bashcmd> --version</code> 
                     </li>
                 </ol>
-                <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2 id="setupkeypair">Setup a Solana Keypair</h2>
                 
@@ -157,7 +162,7 @@
                         <br><br><code class="unindent"><tomlvar>json_rpc_url</tomlvar>: https://api.devnet.solana.com</code><br><br> 
                     </li>
                     <li>
-                        Airdrop yourself some devnet SOL with <br><br><code class="unindent"><bashcmd>solana</bashcmd> airdrop 1</code><br><br>
+                        Airdrop yourself some devnet SOL with <br><br><code class="unindent"><bashcmd>solana</bashcmd> airdrop 1</code><br>
                     </li>
                 </ol>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
@@ -171,9 +176,8 @@
                     <li>
                         Verify the installation by running<br><br><code class="unindent"><bashcmd>cargo</bashcmd> $cli --version</code>
                     </li>
-                    <br>
-                    <br>
                 </ol>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
 
                 <h2 id="installcli">Install WASIX</h2>
              
@@ -185,8 +189,6 @@
                         Verify installation with
                         <br><br><code class="unindent"><bashcmd>cargo</bashcmd> wasix --version</code>
                     </li>
-                    <br>
-                    <br>
                 </ol>
                 <p id="basicfeatures"></p>
 
@@ -204,33 +206,62 @@
                     <li>Let's start with a blank main.rs, clear the contents of this file<br><br><code class="unindent"><bashcmd>echo</bashcmd> "" &gt; src/main.rs</code><br></li>                    
                     <li>Open <path>src/main.rs</path> with your favorite text editor<br><br></li>
                     <li>Import the Rhizo WebAssembly API<br><br><code class="unindent">use <rustvar>api</rustvar>::<rusttype>*</rusttype>;</code><br></li>
-                    <li>Call the fn_main macro to declare a main function, read the buffer of arguments, and return route output bytes.<br><br><code class="unindent"><rustvar>fn_main!</rustvar>({ <ruststr>b"Hello, world!"</ruststr>.to_vec() })</code><br>Congratulations! You just finished writing your first Rhizo function.<br><br></li>                    
+                    <li>Call the fn_main macro to declare a main function, read the buffer of arguments, and return route's output bytes.<br><br><code class="unindent"><rustvar>fn_main!</rustvar>({<rustvar>|</rustvar>_<rustvar>|</rustvar>  <ruststr>b"Hello, world!"</ruststr>.to_vec() });</code><br>Congratulations! You just finished writing your first Rhizo function.<br><br></li>                    
                     <li>Compile your Rust code to WebAssmebly<br><br><code class="unindent"><bashcmd>cargo</bashcmd> wasix build --release</code><br></li>                    
                 </ol>
-                <br>
                         <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2 id="configuration">Configure Routes</h2>
+                
+                <!--  TODO: point to official rust docs here but provide light overiview and examples-->
                 This section focuses on a Rhizo functions' route <a href="https://toml.io/en/">TOML</a> configuration. Now that we've walked through the development flow and compiled WebAssembly code we just need a route configuration before deploying and executing this function on the web. The route configuration will configure how your function interfaces with callers over HTTP on Rhizo servers. 
                     <br>
                     <br>
-                    <b>route</b> - The route variable is an identifier for your code. This function will become publicly available at a route on Rhizo servers made of the encoding type, the author's public key, and the route.
+                    <b>route:</b> String - The route variable is an identifier for your code. This function will become publicly available at a route on Rhizo servers made of the encoding type, the author's public key, and the route.
                     <br><br>
-                    <b>encodings</b> - Encodings indicate what output types you would like your function's route to support.<br><b>Supported Values:</b> [texthtml, textplain, applicationoctetstream]
-                    <br><br>
-                    <b>arguments </b> - At runtime arguments are parsed from query parameters on the incoming request. These values can be fetched from within the WebAssembly container with the Rhizo API.
-                    <br><br>Argument<br> { name: String, argument_type: ArgumentType }
-                    <br><br><b>Supported ArgumentTypes:</b> [u8, u16, u32, u64, i8, i16, i32, i64, f32, f64, String, Vec&lt;VecType&gt;]
-                    <br><b>Supported VecTypes:</b> [u8, u16, u32, u64, i8, 16, i32, i64, f32, f64, String, Vec&lt;u8&gt;, Vec&lt;String&gt;]
-                    <br><br>See <a href="https://doc.rust-lang.org/book/ch03-02-data-types.html">Rust Data Types</a>.
+                    <b>encodings:</b> <a href="https://docs.rs/rhizo-types/0.1.5/rhizo_types/enum.Encoding.html">Encoding</a> - Encodings indicate what output types you would like your function's route to support.
+                    <br>Supported Encodings:<ul><li>texthtml</li><li>textplain</li><li>applicationoctetstream</li><li>applicationjson</li></ul>
+                    <br>
+                    <b>arguments:</b> Argument - At runtime arguments are parsed from query parameters on the incoming request. These values can be fetched from within the WebAssembly container with the Rhizo API.
+                    <br><br><code>{ name: String, argument_type: ArgumentType }</code>
+                    <br>Supported ArgumentTypes: <ul>
+                        <li>u8 (8-bit unsigned integer)</li>
+                        <li>u16 (16-bit unsigned integer)</li>
+                        <li>u32 (32 bit unsigned integer)</li>
+                        <li>u64 (64 bit unsigned integer)</li>
+                        <li>i8 (8-bit signed integer</li>
+                        <li>i16 (16-bit signed integer)</li>
+                        <li>i32 (32-bit signed integer)</li>
+                        <li>i64 (64-bit signed integer)</li>
+                        <li>f32 (32-bit floating point)</li>
+                        <li>f64 (64-bit floating point)</li>
+                        <li>String</li>
+                        <li>Vec&lt;VecType&gt;</li>
+                    </ul>
+                    Supported VecTypes:<ul>
+                        <li>Vec&lt;u8&gt;</li>
+                        <li>Vec&lt;u16&gt;</li>
+                        <li>Vec&lt;u32&gt;</li>
+                        <li>Vec&lt;u64&gt;</li>
+                        <li>Vec&lt;i8&gt;</li>
+                        <li>Vec&lt;i16&gt;</li>
+                        <li>Vec&lt;i32&gt;</li>
+                        <li>Vec&lt;i64&gt;</li>
+                        <li>Vec&lt;f32&gt;</li>
+                        <li>Vec&lt;f64&gt;</li>
+                        <li>Vec&lt;String&gt;</li>
+                        <li>Vec&lt;Vec&lt;u8&gt;&gt;</li>
+                        <li>Vec&lt;Vec&lt;String&gt;&gt;</li>
+                    </ul>
+                    <br>See <a href="https://doc.rust-lang.org/book/ch03-02-data-types.html">Rust Data Types</a>.
+                    <br><br><b>cacheable:</b> bool - Whether or not this route's responses should be cached. Prefer to set this to true. Caching can speed up latencies by orders of magnitude. 
+                    <br><br><b>cache_ttl_ms:</b> Option&lt;u64&gt; - The amount of ms your route's responses will be cached. Responses are keyed by the content identifier, and argument values. A None value will mean that a rhizo-server will indefinitely hold a response value in cache until evicted by internal processes. <b>Do not</b> set this value to None while cacheable is true unless the module response is truly static for a given set of arguments. 
                     <br><br><h3>Examples:</h3>
                     <br><b>Hello, World!</b>
-                    <br> This example configuration shows a route that can be reached at /text/html/$AUTHOR_PUBKEY/helloworld and takes no arguments. This route will have the text/html content-type on its response.
-                    <br><br><p><div><code><tomlvar>route</tomlvar> = <tomlstr>"helloworld"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"texthtml"</tomlstr>] <br><tomlvar>arguments</tomlvar> = []</code></div></p>
+                    <br> This example configuration shows a route that can be reached at /text/html/$MODULE_CID and takes no arguments. This route will have the text/html content-type on its response.
+                    <br><br><div><code><tomlvar>route</tomlvar> = <tomlstr>"helloworld"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"texthtml"</tomlstr>] <br><tomlvar>arguments</tomlvar> = []<br><rustcmt># Let's set this to true since the route always serves static content.</rustcmt><br><tomlvar>cacheable</tomlvar> = true <br><rustcmt># It's imortant to configure this to a Some value for non-static content.</rustcmt><br><rustcmt># cache_ttl_ms = </rustcmt></code></div>
                     <br><b>Multiple Arguments Multiple Encodings</b>
-                    <br> This example configuration shows a route that can be reached at /text/plain/$AUTHOR_PUBKEY/multiple and application/json/$AUTHOR_PUBKEY/multiple. It takes two arguments: search_term of type String and search_urls of type Vec&lt;String&gt;.
-                    <br><br><code><tomlvar>route</tomlvar> = <tomlstr>"searchurls"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"textplain"</tomlstr>, <tomlstr>"applicationjson"</tomlstr>]<br><tomlvar>arguments</tomlvar> = [<br>{ <tomlvar>name</tomlvar> = <tomlstr>"search_term"</tomlstr>, <tomlvar>argument_type</tomlvar> = <tomlstr>"String"</tomlstr> },<br>{ <tomlvar>name</tomlvar> = <tomlstr>"search_urls"</tomlstr>, <tomlvar>argument_type</tomlvar> = <tomlstr>"Vec&lt;String&gt;"</tomlstr>}<br>]</code>
-                    <p> 
-                </p>
+                    <br> This example configuration shows a route that can be reached at /text/plain/$MODULE_CID and application/json/$MODULE_CID. It takes two arguments: search_term of type String and search_urls of type Vec&lt;String&gt;.
+                    <br><br><code><tomlvar>route</tomlvar> = <tomlstr>"searchurls"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"textplain"</tomlstr>, <tomlstr>"applicationjson"</tomlstr>]<br><tomlvar>arguments</tomlvar> = [<br>&emsp;&emsp;{ <tomlvar>name</tomlvar> = <tomlstr>"search_term"</tomlstr>, <tomlvar>argument_type</tomlvar> = <tomlstr>"String"</tomlstr> },<br>&emsp;&emsp;{ <tomlvar>name</tomlvar> = <tomlstr>"search_urls"</tomlstr>, <tomlvar>argument_type</tomlvar> = <tomlstr>"Vec&lt;String&gt;"</tomlstr>}<br>]<br><tomlvar>cacheable</tomlvar> = true<br><tomlvar>cache_ttl_ms = 60000</tomlvar></code>
                 <br>
                         <div class="divider" style="width:24%; margin:30px 0;"></div>
 
@@ -239,82 +270,129 @@
                     <li>From the directory of your cargo project run<br><br><code class="unindent"><bashcmd>cargo</bashcmd> install $lowercasename-cli</code><br></li>                    
                     <li>Deploy your WASIX compiled WebAssembly<br><br><code class="unindent"><bashcmd>cli</bashcmd> deploy target/wasm32-wasmer-wasi/release/$PROJECT_NAME.wasm $PATH_TO_ROUTE_CONFIG</code></li>
                 </ol>
-                 <p>
-                </p>
                 <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                <h2 id="executing">Run your Code</h2>
-                 Functions can be invoked by requesting their route. A function's route on any Rhizo server will be a concatenation of encoding_type:author_pubkey:route.
+                    <!-- TODO this needs to be updated too -->
+                 Functions can be invoked by requesting their route. A function's route on any Rhizo server will be a concatenation of encoding_type:content_id.
                  <br><h3>Example</h3>
                  Let's take our Hello, world! example from earlier and assume our author pubkey is <path>3E7jPTYR8ZhJm7g4kBsbpW5ibXLwmmWX8XKfAdQmhioZ</path>:
-                 <br><br><code><tomlvar>route</tomlvar> = <tomlstr>"helloworld"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"texthtml"</tomlstr>] <br><tomlvar>arguments</tomlvar> = []</code>
+                 <br><br><div><code><tomlvar>route</tomlvar> = <tomlstr>"helloworld"</tomlstr><br><tomlvar>encodings</tomlvar> = [<tomlstr>"texthtml"</tomlstr>] <br><tomlvar>arguments</tomlvar> = []<br><rustcmt># Let's set this to true since the route always serves static content.</rustcmt><br><tomlvar>cacheable</tomlvar> = true <br><rustcmt># It's imortant to configure this to a Some value for non-static content.</rustcmt><br><rustcmt># cache_ttl_ms = </rustcmt></code></div>
                  <br>We can invoke execution of this function by requesting its route as such
-                 <br><br><code><bashcmd>curl</bashcmd> $URL/text/html/3E7jPTYR8ZhJm7g4kBsbpW5ibXLwmmWX8XKfAdQmhioZ/index</code>
+                 <br><br><code><bashcmd>curl</bashcmd> $URL/text/html/$MODULE_CID</code>
                  <br>Author pubkey is the Solana pubkey that issued the deploy command from the CLI. You can check your Solana pubkey with<br><br>
                  <code><bashcmd>solana</bashcmd> address</code>
-               <p>
-                <br>
-                </p>
-                
+                <br> 
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                
+                <!-- TODO Let's update this example and make it a bit cleaner -->
                 <h2 id="async">Write Async Code</h2>
                 WASIX is a superset of WASI which brings the capability to perform asynchronous and network operations in WebAssembly. There are certain Rust crates with WASIX compatible branches that bring these capabilities to your WebAssembly project.
                 <br><br><a href="https://github.com/wasix-org/">Read more</a> about WASIX compatibility in the Rust ecosystem. 
                 <p>
                 The Rhizo API provides a macro for running code within the tokio asynchronous runtime. This macro expects a block of code which will run asynchronously. From here you can call .await on Futures.
                 <br><h3>Example:</h3>
-                <br><br>
+                <br>
                 <code>
                     use <rustvar>api</rustvar>::<rusttype>*</rusttype>; <rustcmt>// Import API helper functions & macros</rustcmt><br>
                     <br> 
                     <rustvar>fn_main!</rustvar>(( <rustcmt>// Init main function & argument buffer with the fn_main macro </rustcmt><br>
                     &emsp;&emsp;<rustvar>|</rustvar>buffer: <rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;</rustvar><rustvar>|</rustvar> { <rustcmt>// buffer contains our arguments</rustcmt><br>
-                    &emsp;&emsp;&emsp;&emsp;<rustvar>async_block!</rustvar>({<br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>runtime!</rustvar>({<br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustcmt>// We're free to use .await on futures within this block!</rustcmt><br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<ruststr>b"Hello, world!"</ruststr>.to_vec() <br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustcmt>// The async_block macro expects a block that evalutes to Vec<u8>,</rustcmt><br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustcmt>// the route's output bytes</rustcmt><br>
                     &emsp;&emsp;&emsp;&emsp;});<br>
-                    });<br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>vec!</rustvar>[]<rustcmt> // runtime! will take care of writing the return value</rustcmt><br>
+                    }));<br>
                     
                 </code>                 
                 </p>   
                        <div class="divider" style="width:24%; margin:30px 0;"></div>
  
                 <h2 id="http">Make HTTP Requests</h2>
+                <!-- TODO clean up this example to be more idiomatic -->
                 WASIX is a superset of WASI which brings the capability to perform asynchronous and network operations in WebAssembly. There are certain Rust crates with WASIX compatible branches that bring these capabilities to your WebAssembly project.
                 <br><br><a href="https://github.com/wasix-org/">Read more</a> about WASIX compatibility in the Rust ecosystem.
                 <p>
                 The reqwest crate is a WASIX compatible way to make HTTP requests in your function.
                 <br><h3>Example:</h3>
-                <br>This example demonstrates how make an HTTP get request from your WebAssembly code. <br>
+                This example demonstrates how make an HTTP get request from your WebAssembly code. 
+                <br><br>
                 <code>
                     use <rustvar>api</rustvar>::<rusttype>*</rusttype>; <rustcmt>// Import API helper functions & macros</rustcmt><br>
                     <br> 
                     <rustvar>fn_main!</rustvar>(( <rustcmt>// Init main function & argument buffer with the fn_main macro</rustcmt><br>
                     &emsp;&emsp;<rustvar>|</rustvar>buffer: <rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;</rustvar><rustvar>|</rustvar> { <rustcmt>// buffer contains our arguments, if applicable</rustcmt><br>
-                    &emsp;&emsp; &emsp;&emsp;<rustvar>async_block!</rustvar>({<br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>runtime!</rustvar>({ <rustcmt>// You can call .await on futures in here!</rustcmt><br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rusttype>let</rusttype> url_argument = <rustvar>api</rustvar>::<rustfn>read_string_argument</rustfn>(buffer);<br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustvar>reqwest</rustvar>::<rustfn>get</rustfn>(url_argument.<rustfn>get</rustfn>())<br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.await<br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>unwrap</rustfn>()<br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>bytes</rustfn>()<br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.await<br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>unwrap</rustfn>()<br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>into_iter</rustfn>()<br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>collect</rustfn>::<rustvar>&lt;</rustvar><rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;&gt;</rustvar>()<br>
-                    &emsp;&emsp; &emsp;&emsp;});<br>
-                    });<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.await?<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>text</rustfn>()<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.await?<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>as_bytes</rustfn>()<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.<rustfn>to_vec</rustfn>()<br>
+                    &emsp;&emsp;&emsp;&emsp;});<br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>vec!</rustvar>[]<rustcmt> // runtime! will take care of writing the return value</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;}<br>
+                    ));<br>
                     
                 </code>                                
                 </p> 
                 <div class="doublespace"></div>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 
-                <!--<h1>Advanced Features</h1>-->
-                
-
+                <h1>Advanced Features</h1>
+                <br>The Rhizo API provides helper functions for reading and writing bytes stored on the Solana blockchain to use in the scope of your module. On-chain bytes can be used to store user data or point to off-chain bytes (coming soon!). Since blockchain storage is relatively expensive, using on-chain bytes to store content identifiers to off-chain bytes will be the recommended practice for non-primitive types.
+                <br><br> In the Rhizo network, user's own their own data. Requestors are responsible for pre-allocating their on-chain bytes before using blockchain write enabled endpoints. Requestors can pre-allocate based on the route configuration by running 
+                <br><br><code><bashcmd>rhizo-cli</bashcmd> alloc $SOMETHINGGOESHERE</code>
+                <br>To manually create on-chain bytes for your own route you can
+                <br><br><code><bashcmd>rhizo-cli</bashcmd> oncb alloc $KEY</code>
+                <br>To manually modify the contents of on-chain bytes post-allocation
+                <br><br><code><bashcmd>rhizo-cli</bashcmd> oncb write $KEY $PATH_TO_CONTENTS</code>
+                <br><br>
+                <h2 id="http">Read On-chain Bytes</h2>
+                <p>
+                <h3>Example:</h3>
+                <br> This example demonstrates how to read on-chain bytes with the Rhizo SDK. The read_onchain_bytes function expects the string representation of the bytes owner's pubkey as well as the key for the on-chain bytes. Since async_runtime! takes care of returning a value out of the container, this route would serialize the bytes returned from read_onchain_bytes().
+                <br><br>
+                <code>
+                    <rustvar>fn_main!</rustvar>(( <rustcmt>// Init main function & argument buffer with the fn_main macro</rustcmt><br>
+                    &emsp;&emsp;<rustvar>|</rustvar>buffer: <rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;</rustvar><rustvar>|</rustvar> { <rustcmt>// buffer contains our arguments, if applicable</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>runtime!</rustvar>({ <rustcmt>// You can call .await on futures in here!</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustvar>rhizo_sdk::read_onchain_bytes</rustvar>(<ruststr>"YOUR_PUBKEY"</ruststr>, <ruststr>"BYTES_KEY"</ruststr>)<br>
+                    &emsp;&emsp;&emsp;&emsp;});<br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>vec!</rustvar>[]<rustcmt> // runtime! will take care of writing the return value</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;}<br>
+                    ));<br>
+                    
+                </code> 
+                </p>
+                <h2 id="http">Write On-chain Bytes</h2>
+                <p>
+                 <h3>Example:</h3>
+                <br> This example demonstrates how to write on-chain bytes with the Rhizo SDK. The write_onchain_bytes function expects the string representation of the bytes owner's pubkey, the key for the on-chain bytes, as well as the bytes to persist. Since async_runtime! takes care of returning a value out of the container, this route would serialize the b"Success" bytes defined after the write_onchain_bytes invocation.
+                <br><br>
+                <code>
+                    <rustvar>fn_main!</rustvar>(( <rustcmt>// Init main function & argument buffer with the fn_main macro</rustcmt><br>
+                    &emsp;&emsp;<rustvar>|</rustvar>buffer: <rusttype>Vec</rusttype><rustvar>&lt;</rustvar><rusttype>u8</rusttype><rustvar>&gt;</rustvar><rustvar>|</rustvar> { <rustcmt>// buffer contains our arguments, if applicable</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>runtime!</rustvar>({ <rustcmt>// You can call .await on futures in here!</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<rustvar>rhizo_sdk::write_onchain_bytes</rustvar>(<ruststr>"username"</ruststr>, <ruststr>b"@rhizodev"</ruststr>.to_vec());<br>
+                    &emsp;&emsp;&emsp;&emsp;<ruststr>b"Success"</ruststr><br>});<br>
+                    &emsp;&emsp;&emsp;&emsp;<rustvar>vec!</rustvar>[]<rustcmt> // runtime! will take care of writing the return value</rustcmt><br>
+                    &emsp;&emsp;&emsp;&emsp;}<br>
+                    ));<br>
+                    
+                </code> 
+                </p>
+                <h2 id="http">Read Off-chain Bytes</h2>
+                <p>
+                Coming soon!
+                </p>
+                <h2 id="http">Write Off-chain Bytes</h2>
+                <p>
+                Coming soon!
+                </p>
             </div>
 
         </div>
