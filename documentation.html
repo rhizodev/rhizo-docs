@@ -82,9 +82,9 @@
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2>Versions Overview:</h2>
              
-                <b>rhizo-cli</b> v0.1.0 This is currently the only supported version of Rhizo.
-                <br><b>rhizo-server</b> v0.1.0-alpha (Coming soon!) Open sources rhizo-server. Off-chain bytes API.
-                <br><b>rhizo-cli</b> v0.1.1 (Coming soon!) Off-chain bytes API support.
+                <b>rhizo-cli</b> v0.1.2 The only supported version of rhizo-cli. 
+                <br><b>rhizo-server</b> v0.1.0-alpha (Coming soon!) Open sources rhizo-server and decentralizes the network.
+                <br><b>rhizo-sdk</b> v0.2.0. The only supported version of rhizo-sdk.
                 <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 <h2>About Rhizo</h2>
@@ -197,6 +197,7 @@
                 <br><br><ol>
                     <li>Create a new cargo project<br><br><code class="unindent"><bashcmd>cargo</bashcmd> new helloworld</code><br></li>                    
                     <li>Change directories to your newly created project<br><br><code class="unindent"><bashcmd>cd</bashcmd> helloworld</code><br></li>
+                    <li>Add rhizo-sdk as a dependency to your project<br><br><code class="unindent"><bashcmd>cargo</bashcmd> add rhizo-sdk</code><br></li>
                     <li>Let's start with a blank main.rs, clear the contents of this file<br><br><code class="unindent"><bashcmd>echo</bashcmd> "" &gt; src/main.rs</code><br></li>                    
                     <li>Open <path>src/main.rs</path> with your favorite text editor<br><br></li>
                     <li>Import the Rhizo WebAssembly API<br><br><code class="unindent">use <rustvar>rhizosdk</rustvar>::<rusttype>fn_main</rusttype>;</code><br></li>
