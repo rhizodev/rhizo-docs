@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Documentation Template</title>
+    <title>Rhizo Documentation</title>
     <meta name="description" content="Rhizo Compute">
 
     <link rel="stylesheet" href="style.css?">
@@ -30,10 +30,10 @@
             <div class="sidepanel">
             <br><br>
 
-                <a class="title" href="#">Introduction</a>
+                <a class="title" href="#intro">Introduction</a>
                 
-                <a class="section" href="#">Supported Versions</a>
-                <a class="section" href="#">About Rhizo</a>
+                <a class="section" href="#versions">Versions Overview</a>
+                <a class="section" href="#about">About Rhizo</a>
                 <a class="section" href="#glossary">Glossary</a>                
 
                 <div class="divider left"></div>
@@ -46,24 +46,24 @@
                 <a class="section" href="#installwasix">Install WASIX</a>       
 
                 <div class="divider left"></div>
-                <a class="title" href="#basicfeatures">How-to</a>
+                <a class="title" href="#howto">How-to</a>
 
-                <a class="section" href="#configuration">Compile a Module</a>
-                <a class="section" href="#compilation">Configure a Route</a>
-                <a class="section" href="#compilation">Validating Routes and Modules</a>
-                <a class="section" href="#compilation">Testing Modules Locally</a>
-                <a class="section" href="#arguments">Deploy Routes</a>
-                <a class="section" href="#deploying">Run Your Code</a>
-                <a class="section" href="#compilation">Inspect Request Logs</a>
-                <a class="section" href="#compilation">Read Arguments in WASM</a>
+                <a class="section" href="#compile">Compile a Module</a>
+                <a class="section" href="#configure">Configure a Route</a>
+                <a class="section" href="#validate">Validate Artifacts</a>
+                <a class="section" href="#test">Test Modules Locally</a>
+                <a class="section" href="#deploy">Deploy Routes</a>
+                <a class="section" href="#run">Run Your Code</a>
+                <a class="section" href="#inspect">Inspect Request Logs</a>
+                <a class="section" href="#read">Read Arguments in WASM</a>
                 <a class="section" href="#async">Write Async Code</a>
                 <a class="section" href="#http">Make HTTP Requests</a>
                 <div class="divider left"></div>
 
                 <a class="title" href="#advanced">Advanced Features</a>
-                <a class="section" href="#configuration">Serve On-chain Data</a>
+                <a class="section" href="#serveonchain">Serve On-chain Data</a>
                 <div class ="divider left"></div>
-                <a class="title" href="#examples">GitHub Examples</a>
+                <a class="title" href="#github">GitHub Examples</a>
                 <a class="section" href="https://github.com/rhizodev/rhizo-hello-world/blob/main/README.md">Hello, World!</a>
 
              <div class="space double"></div>
@@ -74,20 +74,20 @@
                 <br><br>
                 <p><important><b>Important:</b> Solana requirements are for devnet SOL and can be obtained for free by using <inlinecode>solana airdrop 1</inlinecode>. Rhizo devnet will always remain freely available to developers for testing and prototyping. When Rhizo mainnet launches, the newly launched network will use mainnet SOL.</important></p>
             
-                <h1 >Introduction</h1>
+                <h1 id="intro">Introduction</h1>
                 
                 <p>Rhizo is decentralized severless infrastructure for hosting, globally distributing, executing, and serving HTTP routes backed by your WebAssembly code. The Rhizo team wishes to pave the way for decentralizing compute power and building powerful infrastructure and features that help developers build at scale without having to worry about operations. Rhizo is currently in an Alpha build. During this time Rhizo will under-go rapid feature additions, specifically in the realm of streaming and storage.<br><br>Remember, as with anything built upon blockchain technologies, data is public and uploaded source code will live on public servers. Don't put anything in your source code or requests you wouldn't want to be found!<br><br>We would like to keep a tight feedback loop with the Rhizo community and understand the needs of our developers. We encourage you to reach out to the team on official channels.</p> 
         
                  
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2>Versions Overview:</h2>
+                <h2 id="versions">Versions Overview:</h2>
              
                 <b>rhizo-cli</b> v0.1.2 The only supported version of rhizo-cli. 
                 <br><b>rhizo-server</b> v0.1.0-alpha (Coming soon!) Open sources rhizo-server and decentralizes the network.
                 <br><b>rhizo-sdk</b> v0.2.0. The only supported version of rhizo-sdk.
                 <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2>About Rhizo</h2>
+                <h2 id="about">About Rhizo</h2>
                 To jump in head-first check out our <a class="section" href="https://github.com/rhizodev/rhizo-hello-world/blob/main/README.md">Hello, world!</a> example on GitHub. 
                 <br><br>Rhizo stores <b>ultra-lightweight</b> WebAssembly modules paired with HTTP route configurations. Arguments to hosted code are provided through traditional HTTP interfaces, as to maintain <b>compatibility</b> with front-ends requesting HTTP resources.
                 <br>
@@ -95,12 +95,12 @@
                 <br><br>The rhizo network supports a rapidly growing list of geographic zones. All code lives in all zones by default to maximize <b>availibility</b>. Rhizo plans to add many more zones in the future along with the sub-partitioning of existing zones to better serve end-users. Gateway decentralization is part of our upcoming rhizo-server release and a more formal plan regarding zones will be released at that time. A GeoDNS enabled api.rhizo.dev gateway will be coming soon.
                 <br><br>Supported Zones:<ul><li>http://www.usa.rhizo.dev</li><li>http://www.euro.rhizo.dev</li><li>http://www.asia.rhizo.dev</li></ul>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                 <h2>Glossary</h2>
+                 <h2 id="glossary">Glossary</h2>
                  <p>
                  <b>Module</b> - WASIX compiled WebAssembly source.
                  <br><br><b>Route CID</b> - Route Content Identifier is a hash derived from the module source code and route config that serves as a unqiue identifier for that module. Route CIDs are identifiers for route in the context of how end-users interact with them via HTTP. The public facing identifier of a route being its source and config content hash gives end-users they confidence they need, knowing that rhizo servers will always be serving consistent logic for their requests.
                  <br><br><b>Route</b> - A queryable HTTP endpoint hosted on Rhizo servers, a route executes a module after verifying that the required arguments were provided and a supported encoding was requested. A route is defined by a TOML file that is deployed along side the backing module.
-                 <br><br><b>Public Key</b> - TLDR; your Solana public key is your unique identifier on the Rhizo network
+                 <br><br><b>Public Key</b> - TLDR; your Solana public key is your unique identifier on the Rhizo network.
                  <br><br><b>WASM</b> - WebAssembly. In the context of Rhizo, we recommend WASIX compatible WASM to enable network and asynchronous operations 
                  <br><br><b>WASIX</b> - A superset of WebAssembly that enables async programming and network operations.
                  <br><br><b>On-Chain Bytes</b> - On-chain bytes owned by a public key. Owners have the exclusive permission to modify their bytes.
@@ -174,7 +174,7 @@
                 </ol>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
 
-                <h2 id="installcli">Install WASIX</h2>
+                <h2 id="installwasix">Install WASIX</h2>
              
                  <ol>
                     <li>
@@ -192,7 +192,7 @@
             
             
                 <h1>How-to</h1>
-                <h2 id="readingarguments">Compile a Module</h2>
+                <h2 id="compile">Compile a Module</h2>
                 <br><h3>Example:</h3>
                 <br>This example is the classic Hello, world! example for Rhizo.
                 <br><br><ol>
@@ -208,7 +208,7 @@
                     <li>Compile your Rust code to WebAssmebly<br><br><code class="unindent"><bashcmd>cargo</bashcmd> wasix build --release</code><br></li>                    
                 </ol>
                         <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2 id="configuration">Configure Routes</h2>
+                <h2 id="configure">Configure Routes</h2>
                 
                 <!--  TODO: point to official rust docs here but provide light overiview and examples-->
                 This section focuses on a Rhizo functions' route <a href="https://toml.io/en/">TOML</a> configuration. Now that we've walked through the development flow and compiled WebAssembly code we just need a route configuration before deploying and executing this function on the web. The route configuration will configure how your function interfaces with callers over HTTP on Rhizo servers. 
@@ -249,14 +249,14 @@
                 <br>
                         <div class="divider" style="width:24%; margin:30px 0;"></div>
 
-                <h2 id="validating">Validate Route Configs and Modules</h2>
+                <h2 id="validate">Validate Artifacts</h2>
                 rhizo-cli comes with the <inlinecode>validate-module</inlinecode> and <inlinecode>validate-config</inlinecode> commands which allow a developer to understand whether a rhizo-server is capable of parsing and ingesting a route config file or compiled WASM. Provide the path of the resource as an argument to these commands to run a validation. 
                 <br><h3>Example</h3>
                 <br><br><code><bashcmd>rhizo-cli</bashcmd> validate-module target/wasm32-wasmer-wasi/release/local-rhizo-sdk-test.wasm </code>
                 <br><br><code><bashcmd>rhizo-cli</bashcmd> validate-config api.toml</code>
                 <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2 id="testing">Test Modules Locally</h2>
+                <h2 id="test">Test Modules Locally</h2>
                 rhizo-cli comes with the <inlinecode>test-module</inlinecode> command which allows a developer to run the test function of the WASM module. This section demonstrates best practices within rhizo module test functions. Your test function is expected to be named "test", take no arguments, and no return value. Prefix the function with the no_mangle attribute. Use recommended functions from the SDK to generate output and assert.  
                 <br><h3>Example</h3>
                 This test function compiles and passes when run with rhizo-cli.
@@ -273,7 +273,7 @@
                 </code>
                 <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2 id="deploying">Deploy Routes</h2>
+                <h2 id="deploy">Deploy Routes</h2>
                 <p><important><b>Important:</b> While rhizo-server remains an alpha build there will be limitations on the number of routes per pubkey. This limit is enforced by the smart contract and will eventually be lifted. This limit is currently set to 5.</important></p>
                 <ol>
                     <li>If you haven't installed the rhizo-cli already run<br><br><code class="unindent"><bashcmd>cargo</bashcmd> install rhizo-cli</code><br></li>                    
@@ -281,7 +281,7 @@
                 </ol>
                 <br>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-               <h2 id="executing">Run your Code</h2>
+               <h2 id="run">Run your Code</h2>
                     <!-- TODO this needs to be updated too -->
                  Functions can be invoked by requesting their route. A function's route on any Rhizo server will be a concatenation of encoding_type:route_cid.
                  <br><h3>Example</h3>
@@ -293,13 +293,13 @@
                  <code><bashcmd>rhizo-cli</bashcmd> view route helloworld</code>
                 <br> 
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2 id="deploying">Inspect Request Logs</h2>
+                <h2 id="inspect">Inspect Request Logs</h2>
                 Responses for HTTP requests to Rhizo routes will come with a x-rhizo-stdout header. The contents of this header will be the base64 encoded contents of stdout from your module's container runtime.
                 <br><h3>Example</h3>
                 This example shows how to decode a x-rhizo-stdout header value of UmV0dXJuaW5nICJIZWxsbywgd29ybGQhIgo. This can be done with <inlinecode>curl -v</inlinecode> or your favorite HTTP client.
                 <br><br><code><bashcmd>echo</bashcmd> "UmV0dXJuaW5nICJIZWxsbywgd29ybGQhIgo" | <bashcmd>base64</bashcmd> --decode</code>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
-                <h2 id="deploying">Read Arguments in WASM</h2>
+                <h2 id="read">Read Arguments in WASM</h2>
                 This section touches on reading function arguments from within your modules container runtime. Rhizo-server translates the string representation of its types to their standard binary representation. These arguments, after undergoing parsing and serialization, are available to grab from fn_main's argument Cursor, by use of rhizosdk::arg helper functions. Arguments are to be read in the order that they are defined in the route config file. This is an expectation rhizo-server will make. Failure to follow these instructions will result in a runtime error when reading arguments from the Cursor.
                 <br><br>Explore rhizosdk::arg documentation.
                 <br><h3>Example</h3>
@@ -396,7 +396,7 @@
                 <div class="doublespace"></div>
                 <div class="divider" style="width:24%; margin:30px 0;"></div>
                 
-                <h1>Advanced Features</h1>
+                <h1 id="advanced">Advanced Features</h1>
                 <p><important><b>Important:</b> Rhizo's Storage and Streaming APIs are under rapid development. We're excited to share all the exciting features in the pipeline. Expect frequent changes to this section.</important></p>
                 The rhizo-sdk provides helper functions for reading and writing bytes stored on the Solana blockchain. On-chain bytes can be used to store user data or point to off-chain bytes (coming soon!). Since blockchain storage is relatively expensive, using on-chain bytes to store content hash identifiers to off-chain bytes will be the recommended way to store data.
                 <br><br>This allows the blockchain serve as the source of truth allowing the Rhizo network to inherit the security of smart-contracts and digital signatures. This combined with a design paradigm requiring the contents of on-chain data to be equal to the content hash identifier of the off-chain content it points to creates a verifiable chain of trust.
@@ -409,7 +409,7 @@
                To manually modify the contents of on-chain bytes post-allocation
                 <br><br><code><bashcmd>rhizo-cli</bashcmd> socb write $KEY $PATH_TO_NEW_CONTENTS</code>
                 <br><br>
-                <h2 id="http">Serve On-chain Bytes</h2>
+                <h2 id="serveonchain">Serve On-chain Bytes</h2>
                 <p>
                 <h3>Example:</h3>
                 <br> This example demonstrates how to read on-chain bytes with the Rhizo SDK. The read function expects the string representation of the on-chain bytes PDA. Since async_runtime! takes care of returning a value out of the container, this route would serialize the bytes returned from read. This route now acts as a HTTP pointer to mutable on-chain data.
