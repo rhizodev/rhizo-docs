@@ -35,7 +35,7 @@ rustcmt {
 }
 
 important {
-    background-color: #fffee3;
+    background-color: #f5f2e1;
     border-radius: 0.5rem;
     display: block;
     padding: 1rem;
@@ -165,7 +165,7 @@ a:hover {
 }
 
 .clear {
-    background-color: #fff;
+    background-color: #feffe8;
     height: auto;
 }
 
@@ -191,7 +191,7 @@ a:hover {
 .sidepanel {
     width: 200px;
     margin-top: 120px;
-    background-color: #fff;
+    background-color: #feffe8;
     overflow-x: hidden;
     position: fixed;
     height: 80%;
